@@ -193,7 +193,7 @@ jobs:
       - uses: ./.github/actions/setup-node-yarn
         name: Setup
       - name: Run tests
-        run: yarn test:parallel --outputStyle=static --tui=false
+        run: yarn test:parallel --outputStyle=static
 
   test-no-parallel:
     name: Test no parallel
@@ -239,4 +239,4 @@ jobs:
       - uses: ./.github/actions/setup-node-yarn
         name: Setup
       - name: Run no-parallel tests
-        run: yarn test:no-parallel --outputStyle=static --tui=false
+        run: yarn test:no-parallel --outputStyle=static
