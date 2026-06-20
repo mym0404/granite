@@ -38,7 +38,7 @@
   "devDependencies": {
     "@babel/core": "catalog:babel",
     "@babel/preset-env": "catalog:babel",
-    "@babel/preset-typescript": "catalog:tools",
+    "@babel/preset-typescript": "catalog:babel",
     "@types/babel__core": "catalog:babel",
     "@types/babel__preset-env": "catalog:babel",
     "@types/connect": "^3",

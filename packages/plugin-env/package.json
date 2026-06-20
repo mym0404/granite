@@ -36,7 +36,7 @@
   ],
   "devDependencies": {
     "@babel/core": "catalog:babel",
-    "@babel/types": "catalog:tools",
+    "@babel/types": "catalog:babel",
     "@types/babel__core": "catalog:babel",
     "@types/node": "catalog:tools",
     "@vitest/coverage-v8": "catalog:tools",

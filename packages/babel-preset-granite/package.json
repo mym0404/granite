@@ -28,7 +28,7 @@
   "dependencies": {
     "@babel/core": "7.28.5",
     "@babel/plugin-transform-export-namespace-from": "7.27.1",
-    "@react-native/babel-preset": "catalog:react-native"
+    "@react-native/babel-preset": "catalog:rn84"
   },
   "files": [
     "dist"
