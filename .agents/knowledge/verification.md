@@ -42,7 +42,7 @@ For markdown-only repository knowledge edits, browser validation is not needed. 
 
 ## CI Coverage
 
-`.github/workflows/integrations.yaml` runs build, lint, typecheck, and tests on pushes to `main` and pull requests. The lint, typecheck, and test jobs depend on the setup build job and reuse build artifacts. The workflow artifact paths still include `tools/dist`, even though the root workspace list currently has no `tools` workspace.
+`.github/workflows/integrations.yaml` runs build, lint, typecheck, parallel tests, and no-parallel tests on pushes to `main` and pull requests. The lint, typecheck, and test jobs depend on the setup build job and reuse build artifacts. Yarn package archives, Yarn PnP install state, and Nx cache are cached separately; package `dist` output is passed through workflow artifacts, not dependency cache. The workflow artifact paths still include `tools/dist`, even though the root workspace list currently has no `tools` workspace.
 
 `.github/workflows/docs-workflow.yaml` builds the VitePress site and checks that `docs/.vitepress/dist/index.html` exists before deploying GitHub Pages.
 
