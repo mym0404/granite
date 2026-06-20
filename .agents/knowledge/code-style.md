@@ -37,6 +37,8 @@ Do not add an `index.ts` only for re-export convenience unless the package alrea
 
 Yarn PnP uses `pnpFallbackMode: none`; every dependency needed by a package must be declared. Prefer existing Yarn catalogs in `.yarnrc.yml` for shared versions.
 
+Use `.agents/knowledge/dependency_version.md` for catalog group ownership, no-catalog areas, and dependency version verification rules.
+
 Do not bypass PnP by relying on undeclared transitive dependencies.
 
 ## Generated Files
