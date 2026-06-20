@@ -48,12 +48,12 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@react-native/babel-preset": "catalog:react-native",
-    "@types/react": "catalog:react-native",
-    "del-cli": "^6.0.0",
-    "eslint": "^9.7.0",
-    "react": "catalog:react-native",
-    "react-native": "catalog:react-native",
+    "@react-native/babel-preset": "catalog:rn84",
+    "@types/react": "catalog:rn84",
+    "del-cli": "catalog:tools",
+    "eslint": "catalog:tools",
+    "react": "catalog:rn84",
+    "react-native": "catalog:rn84",
     "react-native-builder-bob": "catalog:tools",
     "typescript": "catalog:tools"
   },

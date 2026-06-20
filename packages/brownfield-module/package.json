@@ -75,9 +75,9 @@
   },
   "devDependencies": {
     "brick-module": "catalog:brick-module",
-    "eslint": "^9.7.0",
-    "react": "catalog:react-native",
-    "react-native": "catalog:react-native",
+    "eslint": "catalog:tools",
+    "react": "catalog:rn84",
+    "react-native": "catalog:rn84",
     "react-native-builder-bob": "catalog:tools",
     "typescript": "catalog:tools"
   },
