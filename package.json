@@ -24,7 +24,7 @@
     "publish:dev": "sh .scripts/publish-dev.sh"
   },
   "resolutions": {
-    "typescript": "5.8.3",
+    "typescript": "5.9.3",
     "@babel/core": "7.28.5"
   },
   "dependenciesMeta": {
@@ -42,7 +42,7 @@
     "@types/eslint__js": "^8.42.3",
     "@types/jest": "^29.5.12",
     "@types/node": "catalog:tools",
-    "@types/react": "catalog:react-native",
+    "@types/react": "catalog:rn84",
     "@yarnpkg/types": "^4.0.0",
     "chalk": "^5.3.0",
     "es-toolkit": "^1.39.10",

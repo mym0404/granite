@@ -30,12 +30,12 @@
   },
   "devDependencies": {
     "@types/node": "catalog:tools",
-    "@types/react": "catalog:react-native",
-    "react": "catalog:react-native",
-    "react-native": "catalog:react-native",
+    "@types/react": "catalog:rn84",
+    "react": "catalog:rn84",
+    "react-native": "catalog:rn84",
     "tsdown": "catalog:tools",
     "typescript": "catalog:tools",
-    "vitest": "4.1.3"
+    "vitest": "catalog:tools"
   },
   "peerDependencies": {
     "react": "*",

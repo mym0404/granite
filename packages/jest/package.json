@@ -26,14 +26,14 @@
     "dist"
   ],
   "dependencies": {
-    "jest": "^29.7.0"
+    "jest": "catalog:tools"
   },
   "devDependencies": {
     "@granite-js/native": "workspace:*",
-    "@types/jest": "^29.5.12",
+    "@types/jest": "catalog:tools",
     "@types/node": "catalog:tools",
-    "eslint": "^9.7.0",
-    "tsup": "^8.5.0",
+    "eslint": "catalog:tools",
+    "tsup": "catalog:tools",
     "typescript": "catalog:tools"
   },
   "peerDependencies": {

@@ -8,9 +8,9 @@
   },
   "devDependencies": {
     "@granite-js/pulumi-aws": "workspace:*",
-    "@types/node": "catalog:tools",
+    "@types/node": "24.10.12",
     "@yarnpkg/pnpify": "^4.1.4",
-    "typescript": "catalog:tools"
+    "typescript": "5.9.3"
   },
   "dependencies": {
     "@pulumi/aws": "^6.0.0",

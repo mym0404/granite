@@ -64,8 +64,8 @@
   },
   "devDependencies": {
     "brick-module": "catalog:brick-module",
-    "react": "catalog:react-native",
-    "react-native": "catalog:react-native",
+    "react": "catalog:rn84",
+    "react-native": "catalog:rn84",
     "tsdown": "catalog:tools",
     "typescript": "catalog:tools"
   }

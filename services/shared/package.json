@@ -11,22 +11,22 @@
   "dependencies": {
     "@granite-js/mpack": "workspace:*",
     "@granite-js/react-native": "workspace:*",
-    "@react-native-async-storage/async-storage": "catalog:react-native",
-    "@react-native-community/blur": "catalog:react-native",
-    "@react-navigation/elements": "catalog:react-native",
-    "@react-navigation/native": "catalog:react-native",
-    "@react-navigation/native-stack": "catalog:react-native",
-    "@shopify/flash-list": "catalog:react-native",
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "@react-native-community/blur": "4.4.1",
+    "@react-navigation/elements": "2.9.14",
+    "@react-navigation/native": "7.2.2",
+    "@react-navigation/native-stack": "7.14.10",
+    "@shopify/flash-list": "2.2.2",
     "@toss/error-boundary": "^1.5.2",
-    "brick-module": "catalog:brick-module",
-    "react": "catalog:react-native",
-    "react-native": "catalog:react-native",
-    "react-native-gesture-handler": "catalog:react-native",
-    "react-native-pager-view": "catalog:react-native",
-    "react-native-safe-area-context": "catalog:react-native",
-    "react-native-screens": "catalog:react-native",
-    "react-native-svg": "catalog:react-native",
-    "react-native-webview": "catalog:react-native"
+    "brick-module": "0.5.0",
+    "react": "19.2.3",
+    "react-native": "0.84.0",
+    "react-native-gesture-handler": "2.30.0",
+    "react-native-pager-view": "7.0.2",
+    "react-native-safe-area-context": "5.6.2",
+    "react-native-screens": "4.23.0",
+    "react-native-svg": "15.15.3",
+    "react-native-webview": "13.16.0"
   },
   "devDependencies": {
     "@babel/runtime": "7.18.9",
@@ -34,9 +34,9 @@
     "@granite-js/native": "workspace:*",
     "@granite-js/plugin-hermes": "workspace:*",
     "@granite-js/plugin-micro-frontend": "workspace:*",
-    "@react-native/babel-preset": "catalog:react-native",
-    "@types/node": "catalog:tools",
-    "@types/react": "catalog:react-native",
-    "typescript": "catalog:tools"
+    "@react-native/babel-preset": "0.84.0",
+    "@types/node": "24.10.12",
+    "@types/react": "19.2.0",
+    "typescript": "5.9.3"
   }
 }

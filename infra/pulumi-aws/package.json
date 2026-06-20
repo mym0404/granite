@@ -71,14 +71,14 @@
     "@pulumi/pulumi": "^3.170.0",
     "@types/aws-lambda": "^8.10.149",
     "@types/node": "catalog:tools",
-    "@vitest/coverage-v8": "^4.0.12",
+    "@vitest/coverage-v8": "catalog:tools",
     "aws-lambda": "^1.0.7",
     "aws-sdk-client-mock": "^4.1.0",
     "es-toolkit": "^1.39.8",
-    "tsup": "^8.5.0",
+    "tsup": "catalog:tools",
     "typescript": "catalog:tools",
     "uuid": "^11.1.0",
-    "vitest": "^4.0.12"
+    "vitest": "catalog:tools"
   },
   "peerDependencies": {
     "@pulumi/aws": "*",

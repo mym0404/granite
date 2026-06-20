@@ -37,11 +37,11 @@
   ],
   "devDependencies": {
     "@types/node": "catalog:tools",
-    "@vitest/coverage-v8": "^4.0.12",
-    "eslint": "^9.10.0",
+    "@vitest/coverage-v8": "catalog:tools",
+    "eslint": "catalog:tools",
     "tsdown": "catalog:tools",
     "typescript": "catalog:tools",
-    "vitest": "^4.0.12"
+    "vitest": "catalog:tools"
   },
   "dependencies": {
     "@granite-js/plugin-core": "workspace:*",

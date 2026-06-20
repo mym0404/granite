@@ -67,6 +67,7 @@ Use `.agents/knowledge/design.md` for docs-site and React Native UI guidance. Th
 - `.agents/knowledge/native-host-runtime.md` covers `packages/granite-screen`, Activity-owned host behavior, ReactHost creation, and `shared` bundle instance scope.
 - `.agents/knowledge/verification.md` covers repo-native validation commands, CI coverage, and known blind spots.
 - `.agents/knowledge/code-style.md` covers TypeScript, formatting, linting, package export, and dependency conventions.
+- `.agents/knowledge/dependency_version.md` covers Yarn catalog groups, package manifest version rules, no-catalog areas, and dependency verification checks.
 - `.agents/knowledge/util-selection.md` covers which utility libraries and helper APIs Granite code chooses for CLI, filesystem, workspace, process, prompt, config, and data transformation work.
 - `.agents/knowledge/design.md` covers documentation, sample app, and React Native UI expectations.
 
