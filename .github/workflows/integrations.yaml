@@ -13,20 +13,33 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cache node modules and dist
+      - name: Cache Yarn package archives
         uses: actions/cache@v4
-        id: yarn-cache
+        with:
+          path: .yarn/cache
+          key: ${{ runner.os }}-${{ runner.arch }}-yarn-cache-${{ hashFiles('yarn.lock', '.yarnrc.yml', '.yarn/releases/yarn-*.cjs', '.yarn/plugins/**') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-yarn-cache-
+
+      - name: Cache Yarn PnP install state
+        uses: actions/cache@v4
         with:
           path: |
-            node_modules
-            .yarn/cache
             .yarn/unplugged
-            .nx
-            packages/*/dist
-            tools/dist
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
+          key: ${{ runner.os }}-${{ runner.arch }}-yarn-pnp-${{ hashFiles('yarn.lock', '.yarnrc.yml', 'mise.toml', '.yarn/releases/yarn-*.cjs', '.yarn/plugins/**') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-${{ runner.arch }}-yarn-pnp-
+
+      - name: Cache Nx
+        uses: actions/cache@v4
+        with:
+          path: .nx
+          key: ${{ runner.os }}-${{ runner.arch }}-nx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-nx-
 
       - uses: ./.github/actions/setup-node-yarn
         name: Setup
@@ -49,20 +62,33 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cache node modules and dist
-        uses: actions/cache@v4
-        id: yarn-cache
+      - name: Restore Yarn package archives
+        uses: actions/cache/restore@v4
+        with:
+          path: .yarn/cache
+          key: ${{ runner.os }}-${{ runner.arch }}-yarn-cache-${{ hashFiles('yarn.lock', '.yarnrc.yml', '.yarn/releases/yarn-*.cjs', '.yarn/plugins/**') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-yarn-cache-
+
+      - name: Restore Yarn PnP install state
+        uses: actions/cache/restore@v4
         with:
           path: |
-            node_modules
-            .yarn/cache
             .yarn/unplugged
-            .nx
-            packages/*/dist
-            tools/dist
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
+          key: ${{ runner.os }}-${{ runner.arch }}-yarn-pnp-${{ hashFiles('yarn.lock', '.yarnrc.yml', 'mise.toml', '.yarn/releases/yarn-*.cjs', '.yarn/plugins/**') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-${{ runner.arch }}-yarn-pnp-
+
+      - name: Restore Nx
+        uses: actions/cache/restore@v4
+        with:
+          path: .nx
+          key: ${{ runner.os }}-${{ runner.arch }}-nx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-nx-
 
       - name: Download build artifacts
         uses: actions/download-artifact@v4
@@ -84,20 +110,33 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cache node modules and dist
-        uses: actions/cache@v4
-        id: yarn-cache
+      - name: Restore Yarn package archives
+        uses: actions/cache/restore@v4
+        with:
+          path: .yarn/cache
+          key: ${{ runner.os }}-${{ runner.arch }}-yarn-cache-${{ hashFiles('yarn.lock', '.yarnrc.yml', '.yarn/releases/yarn-*.cjs', '.yarn/plugins/**') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-yarn-cache-
+
+      - name: Restore Yarn PnP install state
+        uses: actions/cache/restore@v4
         with:
           path: |
-            node_modules
-            .yarn/cache
             .yarn/unplugged
-            .nx
-            packages/*/dist
-            tools/dist
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
+          key: ${{ runner.os }}-${{ runner.arch }}-yarn-pnp-${{ hashFiles('yarn.lock', '.yarnrc.yml', 'mise.toml', '.yarn/releases/yarn-*.cjs', '.yarn/plugins/**') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-${{ runner.arch }}-yarn-pnp-
+
+      - name: Restore Nx
+        uses: actions/cache/restore@v4
+        with:
+          path: .nx
+          key: ${{ runner.os }}-${{ runner.arch }}-nx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-nx-
 
       - name: Download build artifacts
         uses: actions/download-artifact@v4
@@ -110,27 +149,40 @@ jobs:
       - name: Check types
         run: yarn typecheck:all
 
-  test:
-    name: Test
+  test-parallel:
+    name: Test parallel
     needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cache node modules and dist
-        uses: actions/cache@v4
-        id: yarn-cache
+      - name: Restore Yarn package archives
+        uses: actions/cache/restore@v4
+        with:
+          path: .yarn/cache
+          key: ${{ runner.os }}-${{ runner.arch }}-yarn-cache-${{ hashFiles('yarn.lock', '.yarnrc.yml', '.yarn/releases/yarn-*.cjs', '.yarn/plugins/**') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-yarn-cache-
+
+      - name: Restore Yarn PnP install state
+        uses: actions/cache/restore@v4
         with:
           path: |
-            node_modules
-            .yarn/cache
             .yarn/unplugged
-            .nx
-            packages/*/dist
-            tools/dist
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
+          key: ${{ runner.os }}-${{ runner.arch }}-yarn-pnp-${{ hashFiles('yarn.lock', '.yarnrc.yml', 'mise.toml', '.yarn/releases/yarn-*.cjs', '.yarn/plugins/**') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-${{ runner.arch }}-yarn-pnp-
+
+      - name: Restore Nx
+        uses: actions/cache/restore@v4
+        with:
+          path: .nx
+          key: ${{ runner.os }}-${{ runner.arch }}-nx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-nx-
 
       - name: Download build artifacts
         uses: actions/download-artifact@v4
@@ -141,4 +193,50 @@ jobs:
       - uses: ./.github/actions/setup-node-yarn
         name: Setup
       - name: Run tests
-        run: yarn test:all
+        run: yarn test:parallel --outputStyle=static
+
+  test-no-parallel:
+    name: Test no parallel
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore Yarn package archives
+        uses: actions/cache/restore@v4
+        with:
+          path: .yarn/cache
+          key: ${{ runner.os }}-${{ runner.arch }}-yarn-cache-${{ hashFiles('yarn.lock', '.yarnrc.yml', '.yarn/releases/yarn-*.cjs', '.yarn/plugins/**') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-yarn-cache-
+
+      - name: Restore Yarn PnP install state
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
+          key: ${{ runner.os }}-${{ runner.arch }}-yarn-pnp-${{ hashFiles('yarn.lock', '.yarnrc.yml', 'mise.toml', '.yarn/releases/yarn-*.cjs', '.yarn/plugins/**') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-yarn-pnp-
+
+      - name: Restore Nx
+        uses: actions/cache/restore@v4
+        with:
+          path: .nx
+          key: ${{ runner.os }}-${{ runner.arch }}-nx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-nx-
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: .
+
+      - uses: ./.github/actions/setup-node-yarn
+        name: Setup
+      - name: Run no-parallel tests
+        run: yarn test:no-parallel --outputStyle=static
