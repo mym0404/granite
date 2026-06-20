@@ -17,6 +17,7 @@
     "test:no-parallel": "nx run-many -t test:no-parallel --parallel=false --nxBail",
     "check-licenses": "node .scripts/licenses.mjs check",
     "check-exports": "tsx --import ./.scripts/check-exports.mts",
+    "check-app-catalogs": "tsx .scripts/check-no-app-catalog.ts",
     "generate-licenses": "node .scripts/licenses.mjs generate",
     "consistency-check-licenses": "node .scripts/licenses.mjs consistency-check",
     "build:all": "nx run-many --targets=build",

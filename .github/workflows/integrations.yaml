@@ -98,6 +98,8 @@ jobs:
 
       - uses: ./.github/actions/setup-node-yarn
         name: Setup
+      - name: Check app catalog usage
+        run: yarn check-app-catalogs
       - name: Check lint
         run: yarn lint
 
