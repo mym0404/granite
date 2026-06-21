@@ -1,10 +1,10 @@
 import fs from 'fs/promises';
 import path from 'path';
 import killPort from 'kill-port';
-import { $ } from 'zx';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import waitPort from 'wait-port';
 import { getYarnWorkspaces, findWorkspacePath } from 'workspace-tools';
+import { $ } from 'zx';
 import type { AppType } from '../appTypes';
 import type { ToolType } from '../toolTypes';
 import { createTmpDir, TmpDirManager } from './createTmpDir';
