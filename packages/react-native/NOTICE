@@ -165,13 +165,25 @@ Third-Party Libraries:
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/colinhacks/zod.git
 	
-25. **brick-module**
+25. **@granite-js/blur-view**
+	
+   - License: Apache-2.0
+   - License Text: https://www.apache.org/licenses/LICENSE-2.0
+   - Repository: git+https://github.com/toss/granite.git
+	
+26. **@granite-js/brownfield-module**
+	
+   - License: Apache-2.0
+   - License Text: https://www.apache.org/licenses/LICENSE-2.0
+   - Repository: git+https://github.com/toss/granite.git
+	
+27. **brick-module**
 	
    - License: Apache-2.0
    - License Text: https://www.apache.org/licenses/LICENSE-2.0
    - Repository: https://github.com/toss/brick.git
 	
-26. **typescript**
+28. **typescript**
 	
    - License: Apache-2.0
    - License Text: https://www.apache.org/licenses/LICENSE-2.0
