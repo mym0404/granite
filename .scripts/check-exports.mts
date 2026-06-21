@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import { readFile } from 'node:fs/promises';
 import { relative, join } from 'node:path';
-import { $ } from 'execa';
+import { $ } from 'zx';
 
 interface PackageInfo {
   name: string;
@@ -42,7 +42,7 @@ interface PackedFile {
 const EXCLUDED_PACKAGE_PATTERNS = [/@granite-js\/docs/];
 
 async function getPackageList() {
-  const { stdout, stderr, exitCode } = await $`yarn workspaces list --json`;
+  const { stdout, stderr, exitCode } = await $({ quiet: true })`yarn workspaces list --json`.nothrow();
 
   if (exitCode !== 0) {
     throw new Error([stdout, stderr].filter(Boolean).join('\n'));
@@ -61,7 +61,8 @@ async function readPackageJson(packagePath: string) {
 }
 
 async function getPackedFiles(packageName: string) {
-  const { stdout, stderr, exitCode } = await $`yarn workspace ${packageName} pack --dry-run --json`;
+  const { stdout, stderr, exitCode } =
+    await $({ quiet: true })`yarn workspace ${packageName} pack --dry-run --json`.nothrow();
 
   if (exitCode !== 0) {
     throw new Error([stdout, stderr].filter(Boolean).join('\n'));
@@ -74,7 +75,10 @@ async function getPackedFiles(packageName: string) {
 }
 
 function normalizeStdout(stdout) {
-  return stdout.split('\n').map((text) => text.trim());
+  return stdout
+    .split('\n')
+    .map((text) => text.trim())
+    .filter(Boolean);
 }
 
 function comparePath(path1: string, path2: string) {
@@ -98,14 +102,11 @@ function shouldVerify(packageJson: PackageJson) {
 async function prebuildPackages(packageJsonList: PackageJson[]) {
   console.log(`Pre-building ${packageJsonList.length} packages (with its dependencies)...`);
   const includePackages = packageJsonList.map(({ name }) => name).join(',');
+  const projectsOption = `--projects=${includePackages}`;
 
-  const { stdout, stderr, exitCode } = await $(
-    'yarn',
-    ['nx', 'run-many', '--target=build', `--projects=${includePackages}`],
-    {
-      stdio: 'inherit',
-    }
-  );
+  const { stdout, stderr, exitCode } = await $`yarn nx run-many --target=build ${projectsOption}`
+    .stdio('inherit', 'inherit', 'inherit')
+    .nothrow();
 
   if (exitCode !== 0) {
     throw new Error([stdout, stderr].filter(Boolean).join('\n'));

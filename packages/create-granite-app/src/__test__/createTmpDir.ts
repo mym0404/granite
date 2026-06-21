@@ -1,7 +1,7 @@
 import { mkdir, rm } from 'fs/promises';
 import os from 'os';
 import path from 'path';
-import { execa } from 'execa';
+import { $ } from 'zx';
 
 export type TmpDirManager = Awaited<ReturnType<typeof createTmpDir>>;
 
@@ -12,14 +12,9 @@ export async function createTmpDir() {
   console.log('Creating tmp dir', dir);
   await mkdir(dir, { recursive: true });
 
-  const $ = (command: string, args: string[] = [], options: { cwd?: string } = {}) => {
-    return execa(command, args, {
-      cwd: options.cwd ? path.join(dir, options.cwd) : dir,
-    });
-  };
   return {
     dir,
-    $,
+    run: $({ cwd: dir, quiet: true }),
     cleanup: async () => {
       await rm(dir, {
         recursive: true,

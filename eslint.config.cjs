@@ -38,6 +38,7 @@ module.exports = tseslint.config(
       '**/esm/',
       '**/.next/',
       '**/.next-local/',
+      '**/.vitest/',
       '**/bin/*.js',
       '.pnp.*',
       '.yarn/',

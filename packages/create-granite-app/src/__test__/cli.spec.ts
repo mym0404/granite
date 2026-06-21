@@ -1,10 +1,10 @@
 import fs from 'fs/promises';
 import path from 'path';
-import { execa } from 'execa';
 import killPort from 'kill-port';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import waitPort from 'wait-port';
 import { getYarnWorkspaces, findWorkspacePath } from 'workspace-tools';
+import { $ } from 'zx';
 import type { AppType } from '../appTypes';
 import type { ToolType } from '../toolTypes';
 import { createTmpDir, TmpDirManager } from './createTmpDir';
@@ -44,7 +44,7 @@ const ADDITIONAL_PACKAGE_NAMES = [
 const rootDir = path.resolve(import.meta.dirname, '..', '..', '..', '..');
 
 const createPackageJsonSnapshots = async () => {
-  const { stdout } = await execa('git', ['ls-files', 'packages/*/package.json'], { cwd: rootDir });
+  const { stdout } = await $({ cwd: rootDir, quiet: true })`git ls-files ${['packages/*/package.json']}`;
   const packageJsonPaths = stdout.split('\n').filter(Boolean);
 
   return Promise.all(
@@ -64,11 +64,7 @@ beforeAll(async () => {
 
   const packageJsonSnapshots = await createPackageJsonSnapshots();
   try {
-    await execa(
-      'yarn',
-      ['tsx', '.scripts/linked-pack.ts', 'create-granite-app', '--packages', ...ADDITIONAL_PACKAGE_NAMES],
-      { cwd: rootDir }
-    );
+    await $({ cwd: rootDir, quiet: true })`yarn tsx .scripts/linked-pack.ts create-granite-app --packages ${ADDITIONAL_PACKAGE_NAMES}`;
 
     console.log('✅ Packing completed successfully');
   } finally {
@@ -119,16 +115,8 @@ const runTemplateTest = (
 
   it.sequential('create files', async () => {
     const packagePath = path.join(createGraniteAppPath, 'package.tgz');
-    const cga = await manager.$('npx', [
-      '--package',
-      packagePath,
-      'create-granite-app',
-      appName,
-      '--type',
-      appType,
-      '--tools',
-      toolType,
-    ]);
+    const cga =
+      await manager.run`npx --package ${packagePath} create-granite-app ${appName} --type ${appType} --tools ${toolType}`;
     expect(cga.stdout).toContain('Done');
 
     const packageJsonPath = path.join(manager.dir, appName, 'package.json');
@@ -188,33 +176,32 @@ const runTemplateTest = (
   });
 
   it.sequential('yarn install', async () => {
-    await fs.writeFile(path.join(manager.dir, appName, 'yarn.lock'), '');
+    const appDir = path.join(manager.dir, appName);
+    await fs.writeFile(path.join(appDir, 'yarn.lock'), '');
 
-    await manager.$('yarn', ['set', 'version', YARN_VERSION], { cwd: appName });
+    await $({ cwd: appDir, quiet: true })`yarn set version ${YARN_VERSION}`;
     await Object.entries(YARN_CONFIGS).reduce(async (prev, [name, value]) => {
       await prev;
-      await manager.$('yarn', ['config', 'set', name, ...(typeof value === 'string' ? [value] : value)], {
-        cwd: appName,
-      });
+      await $({ cwd: appDir, quiet: true })`yarn config set ${name} ${typeof value === 'string' ? value : value}`;
     }, Promise.resolve());
 
-    await manager.$('yarn', ['install', '--no-immutable'], { cwd: appName });
+    await $({ cwd: appDir, quiet: true })`yarn install --no-immutable`;
 
     console.log('✅ yarn install');
   });
 
   it.sequential('yarn typecheck', async () => {
-    await manager.$('yarn', ['typecheck'], { cwd: appName });
+    await $({ cwd: path.join(manager.dir, appName), quiet: true })`yarn typecheck`;
     console.log('✅ yarn typecheck');
   });
 
   it.sequential('yarn lint', async () => {
-    await manager.$('yarn', ['lint'], { cwd: appName });
+    await $({ cwd: path.join(manager.dir, appName), quiet: true })`yarn lint`;
     console.log('✅ yarn lint');
   });
 
   it.sequential('yarn build', async () => {
-    await manager.$('yarn', ['build'], { cwd: appName });
+    await $({ cwd: path.join(manager.dir, appName), quiet: true })`yarn build`;
 
     const distFolder = path.join(manager.dir, appName, 'dist');
     const distFiles = await fs.readdir(distFolder);
@@ -245,9 +232,7 @@ const runTemplateTest = (
   }
 
   it.sequential('yarn dev', async () => {
-    const devProcess = manager.$('yarn', ['dev', '--port', options.port.toString()], {
-      cwd: appName,
-    });
+    const devProcess = $({ cwd: path.join(manager.dir, appName), quiet: true })`yarn dev --port ${options.port.toString()}`;
     const devExit = devProcess.then(
       () => {
         throw new Error('Dev server exited before the port was ready');

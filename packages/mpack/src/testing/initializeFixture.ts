@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import type { BuildConfig } from '@granite-js/plugin-core';
-import execa from 'execa';
+import { $, type Options } from 'zx';
 import { createTmpDir } from './tempDir';
 import { Cache } from '../cache';
 
@@ -17,20 +17,17 @@ export type FixtureTestContext = Awaited<ReturnType<typeof initializeFixture>>;
 
 export async function initializeFixture() {
   const fixtureDir = await createTmpDir();
+  const run = $({ cwd: fixtureDir, quiet: true });
 
   await initializeYarn();
   await installMpack();
 
-  async function $(command: string, args?: string[], options: execa.Options = {}) {
-    return await execa(command, args, { cwd: fixtureDir, ...options });
-  }
-
   async function initializeYarn() {
-    await $('yarn', ['set', 'version', '4.9.1']);
-    await $('yarn', ['init', '-y', '-w']);
+    await run`yarn set version 4.9.1`;
+    await run`yarn init -y -w`;
     await Object.entries(REPOSITORY_CONFIGS).reduce((prev, [name, value]) => {
       return prev.then(() => {
-        return $('yarn', ['config', 'set', name, ...value]).then(() => {});
+        return run`yarn config set ${name} ${value}`.then(() => {});
       });
     }, Promise.resolve());
   }
@@ -46,19 +43,19 @@ export async function initializeFixture() {
   }
 
   async function installMpack() {
-    await $('yarn', ['add', `@granite-js/mpack@${PACKED_PATH}`]);
+    await run`yarn add ${`@granite-js/mpack@${PACKED_PATH}`}`;
   }
 
   async function installDependencies(...deps: string[]) {
-    await $('yarn', ['add', ...deps]);
+    await run`yarn add ${deps}`;
   }
 
   async function getVirtualPath(request: string) {
-    const virtualPath = await $('node', ['-e', `console.log(require.resolve('${request}'));`]);
+    const virtualPath = await run`node -e ${`console.log(require.resolve(${JSON.stringify(request)}));`}`;
     return virtualPath.stdout.trim();
   }
 
-  async function buildWithConfig(config: BuildConfig, options?: execa.Options) {
+  async function buildWithConfig(config: BuildConfig, options?: Partial<Options>) {
     const buildScriptPath = path.resolve(fixtureDir, 'build.js');
     const buildScript = await fs.promises.readFile(path.resolve(__dirname, './fixtures/build-with-config.js'), {
       encoding: 'utf-8',
@@ -101,7 +98,7 @@ export async function initializeFixture() {
 
     await fs.promises.writeFile(buildScriptPath, applyPlaceholders(buildScript, { config: serializedConfig }), 'utf-8');
 
-    await $('node', [buildScriptPath], options);
+    await $({ cwd: fixtureDir, quiet: true, ...options })`node ${buildScriptPath}`;
   }
 
   async function readFile(relativePath: string) {
@@ -136,7 +133,7 @@ export async function initializeFixture() {
 
   return {
     dir: fixtureDir,
-    $,
+    run,
     installDependencies,
     readFile,
     writeFile,

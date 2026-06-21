@@ -1,6 +1,6 @@
-import { exec } from 'node:child_process';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import { $ } from 'zx';
 
 const SHARED_SERVICE_NAME = '@granite-app/shared';
 
@@ -17,18 +17,8 @@ async function getPackageJson() {
 }
 
 async function getSharedPackageJson() {
-  const task = new Promise<string>((resolve, reject) => {
-    exec(`yarn workspace ${SHARED_SERVICE_NAME} exec cat package.json`, (error, stdout) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-
-      resolve(stdout.trim());
-    });
-  });
-
-  const rawPackageJson = await task;
+  const { stdout } = await $({ quiet: true })`yarn workspace ${SHARED_SERVICE_NAME} exec cat package.json`;
+  const rawPackageJson = stdout.trim();
 
   return JSON.parse(rawPackageJson) as {
     dependencies?: Record<string, string>;

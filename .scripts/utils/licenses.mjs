@@ -1,24 +1,20 @@
 import fs from 'fs/promises';
 import path from 'path';
 import * as licenseTemplates from './license-templates.mjs';
-import { execa } from 'execa';
-
-export function $(file, args, options) {
-  return execa(file, args, {
-    cwd: process.cwd(),
-    ...options,
-  });
-}
+import { $ } from 'zx';
 
 /**
  * 워크스페이스 목록을 가져옵니다.
  * @returns {Array<{location: string, name: string}>} 워크스페이스 정보 배열
  */
 export async function getWorkspaces() {
-  const { stdout } = await $('yarn', ['workspaces', 'list', '--json']);
-  return stdout.split('\n').map((line) => {
-    return JSON.parse(line);
-  });
+  const { stdout } = await $({ cwd: process.cwd(), quiet: true })`yarn workspaces list --json`;
+  return stdout
+    .trimEnd()
+    .split('\n')
+    .map((line) => {
+      return JSON.parse(line);
+    });
 }
 
 /**
@@ -78,7 +74,8 @@ export function formatLicenses(packages, extendsLicense, allowedLicenseMap) {
 }
 
 async function transformNoticeTemplate({ workspaceName, license, extendsLicense, allowedLicenseMap }) {
-  const { stdout } = await $('yarn', ['licenses', 'list', '--json', '--focus', workspaceName]);
+  const { stdout } =
+    await $({ cwd: process.cwd(), quiet: true })`yarn licenses list --json --focus ${workspaceName}`;
   const year = new Date().getFullYear();
 
   const template = (() => {
@@ -114,7 +111,8 @@ export async function consistencyCheckLicenses({
 }
 
 export async function getLicensesMetaList({ workspaceName }) {
-  const { stdout } = await $('yarn', ['licenses', 'list', '--json', '--focus', workspaceName]);
+  const { stdout } =
+    await $({ cwd: process.cwd(), quiet: true })`yarn licenses list --json --focus ${workspaceName}`;
 
   const parsedLicenses = parseLicenses(stdout);
   return parsedLicenses;

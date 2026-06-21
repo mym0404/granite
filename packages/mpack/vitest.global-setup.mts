@@ -1,13 +1,13 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import execa from 'execa';
+import { $ } from 'zx';
 
 const TARGET_PACKAGE_NAME = '@granite-js/mpack';
 
 const rootDir = path.resolve(__dirname, '..', '..');
 
 const createPackageJsonSnapshots = async () => {
-  const { stdout } = await execa('git', ['ls-files', 'packages/*/package.json'], { cwd: rootDir });
+  const { stdout } = await $({ cwd: rootDir, quiet: true })`git ls-files ${['packages/*/package.json']}`;
   const packageJsonPaths = stdout.split('\n').filter(Boolean);
 
   return Promise.all(
@@ -27,7 +27,7 @@ export default async () => {
 
   const packageJsonSnapshots = await createPackageJsonSnapshots();
   try {
-    await execa('yarn', ['tsx', '.scripts/linked-pack.ts', TARGET_PACKAGE_NAME], { cwd: rootDir });
+    await $({ cwd: rootDir, quiet: true })`yarn tsx .scripts/linked-pack.ts ${TARGET_PACKAGE_NAME}`;
   } finally {
     await restorePackageJsonSnapshots(packageJsonSnapshots);
   }

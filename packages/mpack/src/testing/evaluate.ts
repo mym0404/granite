@@ -1,7 +1,7 @@
-import execa from 'execa';
+import { $ } from 'zx';
 
 export async function evaluate(code: string) {
-  const result = await execa(`node`, [`-p`, code]);
+  const result = await $({ quiet: true })`node -p ${code}`;
 
   return result.stdout.trim();
 }
