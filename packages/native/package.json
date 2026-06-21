@@ -96,6 +96,7 @@
     "**/*.d.ts",
     "*.d.ts",
     "src",
+    "fingerprint",
     "dist"
   ],
   "dependencies": {

@@ -55,6 +55,47 @@ jobs:
             tools/dist
           retention-days: 1
 
+  changes:
+    name: Changed files
+    runs-on: ubuntu-latest
+    outputs:
+      package_json: ${{ steps.filter.outputs.package_json }}
+      license_metadata: ${{ steps.filter.outputs.license_metadata }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - id: filter
+        name: Filter changed files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            base="${{ github.event.pull_request.base.sha }}"
+          else
+            base="${{ github.event.before }}"
+          fi
+
+          if [[ -z "$base" || "$base" =~ ^0+$ ]]; then
+            base="$(git rev-parse HEAD^)"
+          fi
+
+          changed_files="$(git diff --name-only "$base" "$GITHUB_SHA")"
+
+          if grep -Eq '(^|/)package\.json$' <<< "$changed_files"; then
+            echo "package_json=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "package_json=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          if grep -Eq '(^|/)package\.json$|^yarn\.lock$|^\.scripts/licenses\.mjs$|^\.scripts/utils/(licenses|license-templates)\.mjs$' <<< "$changed_files"; then
+            echo "license_metadata=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "license_metadata=false" >> "$GITHUB_OUTPUT"
+          fi
+
   lint:
     name: Lint
     needs: setup
@@ -105,7 +146,10 @@ jobs:
 
   license:
     name: License
-    needs: setup
+    needs:
+      - setup
+      - changes
+    if: needs.changes.outputs.license_metadata == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -136,6 +180,49 @@ jobs:
         run: yarn check-licenses
       - name: Check license notices
         run: yarn consistency-check-licenses
+
+  package-exports:
+    name: Package exports
+    needs:
+      - setup
+      - changes
+    if: needs.changes.outputs.package_json == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore Yarn package archives
+        uses: actions/cache/restore@v4
+        with:
+          path: .yarn/cache
+          key: ${{ runner.os }}-${{ runner.arch }}-yarn-cache-${{ hashFiles('yarn.lock', '.yarnrc.yml', '.yarn/releases/yarn-*.cjs', '.yarn/plugins/**') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-yarn-cache-
+
+      - name: Restore Yarn PnP install state
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
+          key: ${{ runner.os }}-${{ runner.arch }}-yarn-pnp-${{ hashFiles('yarn.lock', '.yarnrc.yml', 'mise.toml', '.yarn/releases/yarn-*.cjs', '.yarn/plugins/**') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-yarn-pnp-
+
+      - name: Restore Nx
+        uses: actions/cache/restore@v4
+        with:
+          path: .nx
+          key: ${{ runner.os }}-${{ runner.arch }}-nx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-nx-
+
+      - uses: ./.github/actions/setup-node-yarn
+        name: Setup
+      - name: Check package exports
+        run: yarn check-exports
 
   type-check:
     name: Type check
