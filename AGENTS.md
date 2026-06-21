@@ -34,8 +34,9 @@ When you need to consult `react-native-brownfield`, use `~/projects/react-native
 |   +-- pulumi-aws/             # Pulumi AWS CDN and Lambda integration
 +-- services/                   # Example, shared, showcase, and infrastructure testbed apps
 +-- docs/                       # VitePress documentation site
++-- .codex/environments/        # Codex app worktree setup
 +-- .agents/knowledge/          # Repo-local evergreen agent knowledge
-+-- .scripts/                   # Repo-local maintenance and release scripts
++-- .scripts/                   # Repo-local maintenance, validation, release, and worktree bootstrap scripts
 +-- .github/workflows/          # CI, docs deployment, and release workflows
 +-- nx.json                     # Nx target defaults and dependency behavior
 +-- package.json                # Root workspace scripts

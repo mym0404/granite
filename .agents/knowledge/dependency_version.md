@@ -48,6 +48,7 @@ When a no-catalog area needs the same version as a catalog-managed dependency, c
 Use these checks after dependency version changes:
 
 - `yarn install` verifies Yarn can resolve catalogs and regenerates `yarn.lock`.
-- `yarn check-app-catalogs` verifies `packages/create-granite-app/templates/**/package.json` and `services/**/package.json` do not contain `catalog:` values.
-- A catalog reference scan should verify every `catalog:<group>` package name exists in the matching `.yarnrc.yml` catalog.
+- `yarn check-app-catalogs` verifies `packages/create-granite-app/templates/**/package.json` and `services/**/package.json` do not contain `catalog:` values; it does not currently scan package-local `example/` manifests.
+- Manually scan touched package-local `example/` manifests when they are part of a dependency version change.
+- Manually verify every `catalog:<group>` package name exists in the matching `.yarnrc.yml` catalog.
 - `git diff --check` should pass before committing.

@@ -210,8 +210,6 @@ These are current-state mismatches. Report them before changing behavior and ask
 - `packages/plugin-micro-frontend` uses `process.cwd()` for local dir setup, while nearby plugins use `getPackageRoot()`.
 - `packages/plugin-micro-frontend` puts `path.resolve()` output into import strings; check Windows path behavior before copying that pattern.
 - `packages/plugin-router` uses sync FS for full route generation and async FS for watcher-created file fixes.
-- `packages/plugin-router` and `packages/create-granite-app` duplicate placeholder template replacement.
-- `packages/plugin-router` uses `(values as any)` inside template replacement.
 - `packages/plugin-rozenite` uses `as unknown as` for middleware type connection.
 - `packages/plugin-sentry` declares `@granite-js/utils` and `execa`, but source imports were not found.
 - `packages/mpack` mixes `fs`, `fs/promises`, and `node:fs/promises` imports.
