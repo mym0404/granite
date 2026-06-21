@@ -130,6 +130,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Fetch main
+        run: git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main
+
       - uses: ./.github/actions/setup-node-yarn
         name: Setup
         with:
