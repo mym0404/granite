@@ -103,6 +103,40 @@ jobs:
       - name: Check lint
         run: yarn lint
 
+  license:
+    name: License
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore Yarn package archives
+        uses: actions/cache/restore@v4
+        with:
+          path: .yarn/cache
+          key: ${{ runner.os }}-${{ runner.arch }}-yarn-cache-${{ hashFiles('yarn.lock', '.yarnrc.yml', '.yarn/releases/yarn-*.cjs', '.yarn/plugins/**') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-yarn-cache-
+
+      - name: Restore Yarn PnP install state
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            .yarn/unplugged
+            .yarn/install-state.gz
+            .pnp.cjs
+            .pnp.loader.mjs
+          key: ${{ runner.os }}-${{ runner.arch }}-yarn-pnp-${{ hashFiles('yarn.lock', '.yarnrc.yml', 'mise.toml', '.yarn/releases/yarn-*.cjs', '.yarn/plugins/**') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.arch }}-yarn-pnp-
+
+      - uses: ./.github/actions/setup-node-yarn
+        name: Setup
+      - name: Check licenses
+        run: yarn check-licenses
+      - name: Check license notices
+        run: yarn consistency-check-licenses
+
   type-check:
     name: Type check
     needs: setup

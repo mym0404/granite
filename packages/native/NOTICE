@@ -55,7 +55,7 @@ Third-Party Libraries:
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
-   - Repository: git+https://github.com/anthropics/granite.git
+   - Repository: git+https://github.com/toss/granite.git
 	
 7. **@granite-js/video**
 	

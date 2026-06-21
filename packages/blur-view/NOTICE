@@ -21,35 +21,41 @@ limitations under the License.
 ================================================================================
 Third-Party Libraries:
 
-1. **@types/react**
+1. **@granite-js/blur-view**
+	
+   - License: Apache-2.0
+   - License Text: https://www.apache.org/licenses/LICENSE-2.0
+   - Repository: git+https://github.com/toss/granite.git
+	
+2. **typescript**
+	
+   - License: Apache-2.0
+   - License Text: https://www.apache.org/licenses/LICENSE-2.0
+   - Repository: https://github.com/microsoft/TypeScript.git
+	
+3. **@types/react**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/DefinitelyTyped/DefinitelyTyped.git
 	
-2. **react**
+4. **react**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/facebook/react.git
 	
-3. **react-native**
+5. **react-native**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/facebook/react-native.git
 	
-4. **react-native-builder-bob**
+6. **react-native-builder-bob**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/callstack/react-native-builder-bob.git
-	
-5. **typescript**
-	
-   - License: Apache-2.0
-   - License Text: https://www.apache.org/licenses/LICENSE-2.0
-   - Repository: https://github.com/microsoft/TypeScript.git
 	
 
 ================================================================================

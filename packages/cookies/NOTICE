@@ -25,7 +25,7 @@ Third-Party Libraries:
 	
    - License: Apache-2.0
    - License Text: https://www.apache.org/licenses/LICENSE-2.0
-   - Repository: https://github.com/toss/brick.git
+   - Repository: git+https://github.com/toss/granite.git
 	
 2. **brick-module**
 	
@@ -39,13 +39,19 @@ Third-Party Libraries:
    - License Text: https://www.apache.org/licenses/LICENSE-2.0
    - Repository: https://github.com/microsoft/TypeScript.git
 	
-4. **react-native**
+4. **react**
+	
+   - License: MIT
+   - License Text: https://opensource.org/licenses/MIT
+   - Repository: https://github.com/facebook/react.git
+	
+5. **react-native**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/facebook/react-native.git
 	
-5. **tsdown**
+6. **tsdown**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT

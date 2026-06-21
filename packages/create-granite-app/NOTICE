@@ -75,37 +75,43 @@ Third-Party Libraries:
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/egoist/tsup.git
 	
-10. **vitest**
+10. **tsx**
+	
+   - License: MIT
+   - License Text: https://opensource.org/licenses/MIT
+   - Repository: git+https://github.com/privatenumber/tsx.git
+	
+11. **vitest**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/vitest-dev/vitest.git
 	
-11. **wait-port**
+12. **wait-port**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/dwmkerr/wait-port.git
 	
-12. **workspace-tools**
+13. **workspace-tools**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/microsoft/workspace-tools
 	
-13. **yargs**
+14. **yargs**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/yargs/yargs.git
 	
-14. **create-granite-app**
+15. **create-granite-app**
 	
    - License: Apache-2.0
    - License Text: https://www.apache.org/licenses/LICENSE-2.0
    - Repository: git+https://github.com/toss/granite.git
 	
-15. **typescript**
+16. **typescript**
 	
    - License: Apache-2.0
    - License Text: https://www.apache.org/licenses/LICENSE-2.0
