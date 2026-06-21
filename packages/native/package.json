@@ -133,7 +133,8 @@
     "react": "catalog:rn84",
     "react-native": "catalog:rn84",
     "tsx": "catalog:tools",
-    "typescript": "catalog:tools"
+    "typescript": "catalog:tools",
+    "zx": "catalog:tools"
   },
   "peerDependencies": {
     "@babel/runtime": "*",

@@ -213,6 +213,12 @@ Third-Party Libraries:
    - License Text: https://www.apache.org/licenses/LICENSE-2.0
    - Repository: https://github.com/microsoft/TypeScript.git
 	
+33. **zx**
+	
+   - License: Apache-2.0
+   - License Text: https://www.apache.org/licenses/LICENSE-2.0
+   - Repository: git+https://github.com/google/zx.git
+	
 
 ================================================================================
 
