@@ -1,9 +1,61 @@
 name: Setup Node & Yarn
 description: Setup Node & Yarn
 
+inputs:
+  restore_cache:
+    description: Restore Yarn package archive and PnP caches.
+    required: false
+    default: "false"
+  restore_nx:
+    description: Restore Nx cache.
+    required: false
+    default: "false"
+  download_build_artifacts:
+    description: Download build artifacts from setup job.
+    required: false
+    default: "false"
+
 runs:
   using: composite
   steps:
+    - name: Restore Yarn package archives
+      if: ${{ inputs.restore_cache == 'true' }}
+      uses: actions/cache/restore@v4
+      with:
+        path: .yarn/cache
+        key: ${{ runner.os }}-${{ runner.arch }}-yarn-cache-${{ hashFiles('yarn.lock', '.yarnrc.yml', '.yarn/releases/yarn-*.cjs', '.yarn/plugins/**') }}
+        restore-keys: |
+          ${{ runner.os }}-${{ runner.arch }}-yarn-cache-
+
+    - name: Restore Yarn PnP install state
+      if: ${{ inputs.restore_cache == 'true' }}
+      uses: actions/cache/restore@v4
+      with:
+        path: |
+          .yarn/unplugged
+          .yarn/install-state.gz
+          .pnp.cjs
+          .pnp.loader.mjs
+        key: ${{ runner.os }}-${{ runner.arch }}-yarn-pnp-${{ hashFiles('yarn.lock', '.yarnrc.yml', 'mise.toml', '.yarn/releases/yarn-*.cjs', '.yarn/plugins/**') }}
+        restore-keys: |
+          ${{ runner.os }}-${{ runner.arch }}-yarn-pnp-
+
+    - name: Restore Nx
+      if: ${{ inputs.restore_nx == 'true' }}
+      uses: actions/cache/restore@v4
+      with:
+        path: .nx
+        key: ${{ runner.os }}-${{ runner.arch }}-nx-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-${{ runner.arch }}-nx-
+
+    - name: Download build artifacts
+      if: ${{ inputs.download_build_artifacts == 'true' }}
+      uses: actions/download-artifact@v4
+      with:
+        name: build-artifacts
+        path: .
+
     - name: Install Mise
       uses: jdx/mise-action@v4
       with:
