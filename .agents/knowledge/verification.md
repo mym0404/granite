@@ -2,7 +2,9 @@
 
 ## Environment Baseline
 
-Local tool versions live in `mise.toml`; `.nvmrc` mirrors the Node version for local compatibility. CI runs `jdx/mise-action@v4` in `.github/actions/setup-node-yarn/action.yml`, which runs `mise install`, then installs dependencies with `yarn install --immutable`.
+Local tool versions live in `mise.toml`; `.nvmrc` mirrors the Node version for local compatibility. The repo relies on mise for Node and Yarn rather than a committed `.yarn/releases` bundle. CI runs `jdx/mise-action@v4` in `.github/actions/setup-node-yarn/action.yml`, then installs dependencies with `yarn install --immutable`.
+
+Codex app worktree setup lives in `.codex/environments/environment.toml` and delegates to `.scripts/bootstrap_git_workspace.sh`. The bootstrap script copies portable Yarn and Nx caches plus Yarn PnP files into the worktree, skips `.nx/workspace-data` because it contains daemon state, runs `mise trust`, `mise install`, `yarn install --immutable`, and `NX_DAEMON=false yarn build:all`.
 
 Because Yarn Plug'n'Play is enabled, run commands through `yarn` from the relevant workspace instead of calling package binaries directly.
 
@@ -14,7 +16,8 @@ Because Yarn Plug'n'Play is enabled, run commands through `yarn` from the releva
 - `yarn test:all` runs `yarn test:parallel` and then `yarn test:no-parallel`.
 - `yarn test:parallel` runs `nx run-many -t test --nxBail`.
 - `yarn test:no-parallel` runs `nx run-many -t test:no-parallel --parallel=false --nxBail`.
-- `yarn check-exports` runs `.scripts/check-exports.mts`.
+- `yarn check-exports` runs `.scripts/check-exports.mts`; it exits early when `git diff origin/main --name-only` has no `package.json` change, otherwise it builds export-bearing workspaces and verifies package `main`, `module`, `bin`, `types`, and `exports` targets are included in `yarn pack --dry-run`.
+- `yarn check-app-catalogs` runs `.scripts/check-no-app-catalog.ts`.
 - `yarn check-licenses` checks generated license output.
 - `yarn consistency-check-licenses` checks license consistency.
 
@@ -42,7 +45,9 @@ For markdown-only repository knowledge edits, browser validation is not needed. 
 
 ## CI Coverage
 
-`.github/workflows/integrations.yaml` runs build, lint, typecheck, parallel tests, and no-parallel tests on pushes to `main` and pull requests. The lint, typecheck, and test jobs depend on the setup build job and reuse build artifacts. Yarn package archives, Yarn PnP install state, and Nx cache are cached separately; package `dist` output is passed through workflow artifacts, not dependency cache. The workflow artifact paths still include `tools/dist`, even though the root workspace list currently has no `tools` workspace.
+`.github/workflows/integrations.yaml` runs on pushes to `main` and pull requests. The setup job installs with mise/Yarn, runs `yarn build:all`, caches Yarn package archives, Yarn PnP install state, and Nx cache separately, then uploads package `dist` output as workflow artifacts. The workflow artifact paths still include `tools/dist`, even though the root workspace list currently has no `tools` workspace.
+
+The integrations workflow also has a `changes` job that filters package manifest and license metadata changes. `lint` depends on setup and runs `yarn check-app-catalogs` before `yarn lint`. `license` runs only when package manifests, `yarn.lock`, or license scripts change. `package-exports` runs only when a `package.json` changes, fetches `origin/main`, and runs `yarn check-exports`. Typecheck and test jobs depend on setup and reuse build artifacts.
 
 `.github/workflows/docs-workflow.yaml` builds the VitePress site and checks that `docs/.vitepress/dist/index.html` exists before deploying GitHub Pages.
 
@@ -53,3 +58,5 @@ For markdown-only repository knowledge edits, browser validation is not needed. 
 Root CI does not run every docs preview path, native mobile runtime scenario, or cloud deployment path. For changes that affect React Native runtime behavior, native integration, AWS resources, or deployment workflows, add a focused package-level check and document any environment-dependent gap in the handoff.
 
 Some commands depend on prior build output because Nx target defaults make tests and typechecks depend on upstream builds. If a local failure mentions missing `dist` output or declarations, run the required build target before changing logic.
+
+CI package export validation is conditional on `package.json` changes. If a source or build-config change can affect packed files without touching a package manifest, run `yarn check-exports` manually.
