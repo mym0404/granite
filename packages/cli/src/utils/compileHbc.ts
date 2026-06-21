@@ -2,7 +2,7 @@ import assert from 'assert';
 import os from 'os';
 import path from 'path';
 import { isNotNil } from 'es-toolkit';
-import execa from 'execa';
+import { $ } from 'zx';
 
 interface CompileHbcOptions {
   rootDir: string;
@@ -20,23 +20,22 @@ export async function compileHbc({ rootDir, filePath, sourcemap }: CompileHbcOpt
   const binary = getHermesc(rootDir);
   const outfile = path.resolve(rootDir, filePath.replace(new RegExp(`${path.extname(filePath)}$`), '.hbc'));
 
-  await execa(
-    binary,
-    [
-      // Disable warnings
-      '-w',
-      // Expensive optimizations
-      '-O',
-      // Emit binary
-      '-emit-binary',
-      // Emit source map
-      sourcemap ? '-output-source-map' : null,
-      // Output path
-      '-out',
-      outfile,
-      filePath,
-    ].filter(isNotNil)
-  );
+  const args = [
+    // Disable warnings
+    '-w',
+    // Expensive optimizations
+    '-O',
+    // Emit binary
+    '-emit-binary',
+    // Emit source map
+    sourcemap ? '-output-source-map' : null,
+    // Output path
+    '-out',
+    outfile,
+    filePath,
+  ].filter(isNotNil);
+
+  await $({ quiet: true })`${binary} ${args}`;
 
   return { outfile, sourcemapOutfile: sourcemap ? `${outfile}.map` : null };
 }

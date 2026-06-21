@@ -28,7 +28,7 @@ describe('bundle', () => {
       outfile,
     });
 
-    const { stdout } = await context.$(`node`, [outfile]);
+    const { stdout } = await context.run`node ${outfile}`;
 
     expect(stdout.trim()).toBe(reactNativeVersion);
   });
@@ -52,7 +52,7 @@ describe('bundle', () => {
       },
     });
 
-    const { stdout } = await context.$(`node`, [outfile]);
+    const { stdout } = await context.run`node ${outfile}`;
 
     expect(stdout.trim()).toBe(nextReactNativeVersion);
   });
@@ -137,7 +137,7 @@ describe('bundle', () => {
       outfile,
     });
 
-    const { stdout } = await context.$(`node`, [outfile]);
+    const { stdout } = await context.run`node ${outfile}`;
 
     expect(stdout.trim()).toMatchInlineSnapshot(`"mul(10, 5) = 50"`);
   });
