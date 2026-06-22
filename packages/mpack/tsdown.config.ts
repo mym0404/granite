@@ -1,17 +1,17 @@
-import { defineConfig } from 'tsup';
-
-const RESOLVE_EXTENSION = ['ts', 'js'];
+import { defineConfig } from 'tsdown';
 
 export default defineConfig({
   entry: [
-    `src/**/*.{${RESOLVE_EXTENSION.join(',')}}`,
+    'src/**/*.{ts,js}',
     '!**/*.{spec,test,stories,d}.*',
     '!**/fixtures/**',
     '!**/__snapshots__/**',
   ],
   format: ['cjs'],
-  external: ['pnpapi'],
+  external: ['pnpapi', 'metro-babel-register'],
   dts: false,
-  bundle: false,
+  unbundle: true,
+  skipNodeModulesBundle: true,
   clean: true,
+  fixedExtension: false,
 });

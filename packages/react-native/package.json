@@ -9,7 +9,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest --no-watch --coverage",
     "lint": "eslint .",
-    "build": "tsup && tsc -p tsconfig.build.json",
+    "build": "tsdown && tsc -p tsconfig.build.json",
     "prepack": "yarn build"
   },
   "main": "./src/index.ts",
@@ -108,7 +108,7 @@
     "react": "catalog:rn84",
     "react-dom": "catalog:rn84",
     "react-native": "catalog:rn84",
-    "tsup": "^8.5.0",
+    "tsdown": "catalog:tools",
     "typescript": "catalog:tools",
     "vitest": "^4.0.12",
     "zod": "^4.1.12"

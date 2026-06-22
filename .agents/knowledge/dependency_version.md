@@ -13,7 +13,7 @@ Current catalog groups:
 - `rn84-hermes` contains Hermes parser packages that are coupled to the React Native 0.84 toolchain.
 - `babel` contains Babel core, Babel presets, Babel runtime, `@babel/types`, and `@types/babel__*` packages that are not React Native-owned.
 - `swc` contains `@swc/core` and `@swc/helpers`.
-- `tools` contains shared static tooling such as TypeScript, `tsdown`, `tsup`, `tsx`, Vitest, Jest, ESLint, `esbuild`, `rimraf`, and Node/Jest types.
+- `tools` contains shared static tooling such as TypeScript, `tsdown`, `tsx`, Vitest, Jest, ESLint, `esbuild`, `rimraf`, and Node/Jest types.
 
 When a static tool or type package is used by multiple repository packages, prefer adding a fixed catalog entry and using `catalog:tools` in the relevant workspace manifests. Keep package-specific or single-use dependencies as direct versions unless they become shared enough to catalog.
 

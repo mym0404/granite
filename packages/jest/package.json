@@ -6,7 +6,7 @@
     "prepack": "yarn build",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "build": "tsup"
+    "build": "tsdown"
   },
   "types": "./dist/index.d.ts",
   "repository": {
@@ -33,7 +33,7 @@
     "@types/jest": "catalog:tools",
     "@types/node": "catalog:tools",
     "eslint": "catalog:tools",
-    "tsup": "catalog:tools",
+    "tsdown": "catalog:tools",
     "typescript": "catalog:tools"
   },
   "peerDependencies": {

@@ -147,11 +147,11 @@ Third-Party Libraries:
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/sindresorhus/ora.git
 	
-22. **tsup**
+22. **tsdown**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
-   - Repository: https://github.com/egoist/tsup.git
+   - Repository: git+https://github.com/rolldown/tsdown.git
 	
 23. **typanion**
 	

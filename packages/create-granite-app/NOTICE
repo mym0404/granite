@@ -63,11 +63,11 @@ Third-Party Libraries:
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/tiaanduplessis/kill-port.git
 	
-8. **tsup**
+8. **tsdown**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
-   - Repository: https://github.com/egoist/tsup.git
+   - Repository: git+https://github.com/rolldown/tsdown.git
 	
 9. **tsx**
 	

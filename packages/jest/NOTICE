@@ -45,11 +45,11 @@ Third-Party Libraries:
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/jestjs/jest.git
 	
-5. **tsup**
+5. **tsdown**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
-   - Repository: https://github.com/egoist/tsup.git
+   - Repository: git+https://github.com/rolldown/tsdown.git
 	
 6. **typescript**
 	

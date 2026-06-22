@@ -7,7 +7,7 @@
     "prepack": "yarn build",
     "typecheck": "tsc --noEmit",
     "test": "vitest --no-watch --coverage",
-    "build": "tsup"
+    "build": "tsdown"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -37,7 +37,7 @@
     "@types/node": "catalog:tools",
     "@types/yauzl": "^2.10.3",
     "@vitest/coverage-v8": "catalog:tools",
-    "tsup": "catalog:tools",
+    "tsdown": "catalog:tools",
     "typescript": "catalog:tools",
     "vitest": "catalog:tools"
   },

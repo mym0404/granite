@@ -69,11 +69,11 @@ Third-Party Libraries:
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/toss/es-toolkit.git
 	
-9. **tsup**
+9. **tsdown**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
-   - Repository: https://github.com/egoist/tsup.git
+   - Repository: git+https://github.com/rolldown/tsdown.git
 	
 10. **valibot**
 	

@@ -61,7 +61,7 @@
     "prepack": "yarn build",
     "typecheck": "tsc --noEmit",
     "test": "vitest --run --coverage",
-    "build": "rm -rf dist && tsup"
+    "build": "rm -rf dist && tsdown"
   },
   "devDependencies": {
     "@aws-sdk/client-cloudfront": "^3.812.0",
@@ -75,7 +75,7 @@
     "aws-lambda": "^1.0.7",
     "aws-sdk-client-mock": "^4.1.0",
     "es-toolkit": "^1.39.8",
-    "tsup": "catalog:tools",
+    "tsdown": "catalog:tools",
     "typescript": "catalog:tools",
     "uuid": "^11.1.0",
     "vitest": "catalog:tools"

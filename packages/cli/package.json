@@ -29,7 +29,7 @@
     "prepack": "yarn build",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "build": "tsup"
+    "build": "tsdown"
   },
   "files": [
     "dist",
@@ -48,7 +48,7 @@
     "@vitest/coverage-v8": "catalog:tools",
     "esbuild": "catalog:tools",
     "eslint": "catalog:tools",
-    "tsup": "catalog:tools",
+    "tsdown": "catalog:tools",
     "typescript": "catalog:tools",
     "vitest": "catalog:tools"
   },
