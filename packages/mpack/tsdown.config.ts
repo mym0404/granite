@@ -8,10 +8,12 @@ export default defineConfig({
     '!**/__snapshots__/**',
   ],
   format: ['cjs'],
-  external: ['pnpapi', 'metro-babel-register'],
+  deps: {
+    neverBundle: ['pnpapi', 'metro-babel-register'],
+    skipNodeModulesBundle: true,
+  },
   dts: false,
   unbundle: true,
-  skipNodeModulesBundle: true,
   clean: true,
   fixedExtension: false,
 });

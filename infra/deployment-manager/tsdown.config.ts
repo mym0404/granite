@@ -7,7 +7,9 @@ export default defineConfig([
     outDir: 'dist',
     dts: true,
     shims: true,
-    external: ['@aws-sdk/client-s3'],
+    deps: {
+      neverBundle: ['@aws-sdk/client-s3'],
+    },
     fixedExtension: false,
     outputOptions: {
       codeSplitting: false,

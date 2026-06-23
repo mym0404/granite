@@ -5,5 +5,8 @@ export default defineConfig({
   format: 'esm',
   outDir: 'dist',
   dts: false,
+  deps: {
+    onlyBundle: false,
+  },
   fixedExtension: false,
 });

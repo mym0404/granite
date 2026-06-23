@@ -9,7 +9,9 @@ export default defineConfig([
     outDir: 'dist',
     dts: true,
     shims: true,
-    external: ['@granite-js/pulumi-aws'],
+    deps: {
+      neverBundle: ['@granite-js/pulumi-aws'],
+    },
     copy: [{ from: './public/prebuilt-shared', to: './dist' }],
     fixedExtension: false,
     outputOptions: {
