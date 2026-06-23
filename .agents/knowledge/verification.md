@@ -45,7 +45,7 @@ For markdown-only repository knowledge edits, browser validation is not needed. 
 
 ## CI Coverage
 
-`.github/workflows/integrations.yaml` runs on pushes to `main` and pull requests. The setup job installs with mise/Yarn, runs `yarn build:all`, caches Yarn package archives, Yarn PnP install state, and Nx cache separately, then uploads package `dist` output as workflow artifacts. The workflow artifact paths still include `tools/dist`, even though the root workspace list currently has no `tools` workspace.
+`.github/workflows/integrations.yaml` runs on pushes to `main` and pull requests. The setup job installs with mise/Yarn, runs `yarn build:all`, caches Yarn package archives, Yarn PnP install state, and Nx cache separately, then uploads `packages/*/dist` as workflow artifacts. The artifact paths still include `tools/dist`, even though the root workspace list currently has no `tools` workspace, and they do not include `infra/*/dist`.
 
 The integrations workflow also has a `changes` job that filters package manifest and license metadata changes. `lint` depends on setup and runs `yarn check-app-catalogs` before `yarn lint`. `license` runs only when package manifests, `yarn.lock`, or license scripts change. `package-exports` runs only when a `package.json` changes, fetches `origin/main`, and runs `yarn check-exports`. Typecheck and test jobs depend on setup and reuse build artifacts.
 
