@@ -39,11 +39,11 @@ Third-Party Libraries:
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/vitest-dev/vitest.git
 	
-4. **tsup**
+4. **tsdown**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
-   - Repository: https://github.com/egoist/tsup.git
+   - Repository: git+https://github.com/rolldown/tsdown.git
 	
 5. **vitest**
 	

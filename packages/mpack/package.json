@@ -37,7 +37,7 @@
   "scripts": {
     "prepack": "yarn build",
     "typecheck": "tsc --noEmit",
-    "build": "tsup && tsc -p tsconfig.build.json && node .scripts/copy-vendors-dts.mjs",
+    "build": "tsdown && tsc -p tsconfig.build.json && node .scripts/copy-vendors-dts.mjs",
     "lint": "eslint .",
     "test:no-parallel": "vitest --no-watch --no-file-parallelism --coverage"
   },
@@ -68,6 +68,7 @@
     "eslint": "9.7.0",
     "fast-glob": "^3.3.2",
     "prettier-2": "npm:prettier@^2",
+    "tsdown": "catalog:tools",
     "typescript": "catalog:tools",
     "vitest": "^4.0.12",
     "zx": "catalog:tools"
@@ -161,7 +162,6 @@
     "sucrase": "^3.35.0",
     "temp": "0.8.3",
     "throat": "^5.0.0",
-    "tsup": "catalog:tools",
     "url": "0.11.0",
     "util": "0.12.5",
     "ws": "^8.18.0",

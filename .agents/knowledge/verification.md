@@ -27,7 +27,7 @@ For narrow changes, prefer the smallest package workspace command that covers th
 
 - TypeScript packages usually expose `yarn workspace <workspace-name> typecheck`.
 - Packages with tests expose either `test` or `test:no-parallel`.
-- Build tools vary by package: `tsdown`, `tsup`, `bob build`, TypeScript build configs, Granite build, or Gradle.
+- Build tools vary by package: `tsdown`, `bob build`, TypeScript build configs, Granite build, or Gradle.
 - Example Granite services use package-local `granite build` scripts.
 - `packages/granite-screen` builds its Gradle plugin from `packages/granite-screen/gradle-plugin`.
 

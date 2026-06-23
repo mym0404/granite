@@ -13,7 +13,7 @@ When you need to consult `react-native-brownfield`, use `~/projects/react-native
 - React 19.2.3 and React Native 0.84.0 are pinned through Yarn catalogs in `.yarnrc.yml`.
 - Yarn Plug'n'Play is enabled with `nodeLinker: pnp`; use `yarn` rather than npm or pnpm inside this repo.
 - Nx runs cross-workspace build, typecheck, and test targets.
-- Package builds use `tsdown`, `tsup`, `react-native-builder-bob`, TypeScript, and Gradle depending on the package.
+- Package builds use `tsdown`, `react-native-builder-bob`, TypeScript, and Gradle depending on the package.
 - Tests use Vitest, Jest, and package-specific test scripts.
 - Documentation is a VitePress app in `docs/`.
 

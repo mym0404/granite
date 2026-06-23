@@ -22,8 +22,8 @@
   "scripts": {
     "prepack": "yarn build && tsx scripts/rewriteTemplateDepVersions.ts fixed",
     "postpack": "tsx scripts/rewriteTemplateDepVersions.ts workspace",
-    "build": "tsup src/index.ts --format esm",
-    "dev": "tsup src/index.ts --format esm --watch",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
     "typecheck": "tsc --noEmit",
     "test:no-parallel": "vitest --no-watch --coverage"
   },
@@ -34,7 +34,7 @@
     "@vitest/coverage-v8": "catalog:tools",
     "es-toolkit": "^1.39.8",
     "kill-port": "2.0.1",
-    "tsup": "catalog:tools",
+    "tsdown": "catalog:tools",
     "tsx": "catalog:tools",
     "typescript": "catalog:tools",
     "vitest": "catalog:tools",

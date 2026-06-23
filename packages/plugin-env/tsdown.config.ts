@@ -5,7 +5,9 @@ export default defineConfig([
     entry: ['src/index.ts'],
     format: ['esm', 'cjs'],
     dts: true,
-    external: ['./plugins/babel.cjs'],
+    deps: {
+      neverBundle: ['./plugins/babel.cjs'],
+    },
     fixedExtension: false,
   },
   {
