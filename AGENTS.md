@@ -24,6 +24,7 @@ When you need to consult `react-native-brownfield`, use `~/projects/react-native
 +-- packages/                  # Published Granite packages and plugins
 |   +-- react-native/           # Core Granite React Native runtime and public entrypoints
 |   +-- mpack/                  # ESBuild-based bundler and experimental dev server
+|   +-- app-management/          # App and workspace management primitives
 |   +-- plugin-core/            # Granite config schema, plugin contracts, and config merging
 |   +-- plugin-*/               # Official Granite build/dev plugins
 |   +-- create-granite-app/     # App scaffolding CLI and templates

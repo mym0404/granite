@@ -4775,6 +4775,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@granite-js/app-management@workspace:packages/app-management":
+  version: 0.0.0-use.local
+  resolution: "@granite-js/app-management@workspace:packages/app-management"
+  dependencies:
+    tsdown: "catalog:tools"
+    typescript: "catalog:tools"
+  languageName: unknown
+  linkType: soft
+
 "@granite-js/blur-view@workspace:*, @granite-js/blur-view@workspace:packages/blur-view":
   version: 0.0.0-use.local
   resolution: "@granite-js/blur-view@workspace:packages/blur-view"

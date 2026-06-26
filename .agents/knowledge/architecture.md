@@ -10,6 +10,7 @@ Nx discovers workspace package targets from package scripts. `nx.json` makes `ty
 
 - `packages/react-native` is the core public runtime package. Start at `packages/react-native/src/index.ts` for exported components and utilities, `packages/react-native/src/config.ts` for config re-exports, and `packages/react-native/src/cli.ts` for CLI-facing runtime exports.
 - `packages/mpack` is the Granite bundler package. Start at `packages/mpack/src/index.ts` and `packages/mpack/src/bundler/Bundler.ts` for build flow, plugin driver integration, and ESBuild context handling.
+- `packages/app-management` owns shared app and workspace management primitives intended for Granite CLI and scaffolding flows.
 - `packages/plugin-core` owns shared Granite config and plugin contracts. Start at `packages/plugin-core/src/schema/pluginConfig.ts`, `packages/plugin-core/src/config/defineConfig.ts`, and `packages/plugin-core/src/utils/resolvePlugins.ts`.
 - `packages/plugin-*` packages extend Granite build or dev behavior through the plugin-core contracts. Keep package-specific plugin behavior inside the matching plugin package.
 - `packages/native` is a facade for native React Native ecosystem packages and related generated declarations.
