@@ -1,11 +1,11 @@
 import path from 'path';
 import { mergeBuildConfigs, type BuildConfig } from '@granite-js/plugin-core';
+import { resolveReactNativePackageRoot } from '@granite-js/utils';
 import type { BundlerConfig } from '../../types';
-import { getDefaultReactNativePath } from '../../utils/getDefaultReactNativePath';
 
 export function getReactNativeSetupScripts({
   rootDir,
-  reactNativePath = getDefaultReactNativePath(rootDir),
+  reactNativePath = resolveReactNativePackageRoot({ rootDir }),
   skipReactNativePolyfills = false,
   skipReactNativeInitializeCore = false,
 }: {

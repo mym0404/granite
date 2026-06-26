@@ -1,11 +1,11 @@
 import { isBuildSuccess, type GranitePluginCore } from '@granite-js/plugin-core';
+import { getPackageRoot, resolveHermesBinaryPath } from '@granite-js/utils';
 import { compileHbc, type CompileHbcResult } from './compileHbc';
 import { writeComposedSourcemap } from './composeSourcemap';
-import { resolveHermesBinaryPath } from './resolveHermesBinaryPath';
 import type { HermesPluginOptions } from './types';
 
 export const hermesPlugin = (options?: HermesPluginOptions): GranitePluginCore => {
-  const hermesc = options?.binaryPath ?? resolveHermesBinaryPath();
+  const hermesc = options?.binaryPath ?? resolveHermesBinaryPath({ rootDir: getPackageRoot() });
 
   return {
     name: 'hermes-plugin',

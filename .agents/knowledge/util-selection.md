@@ -7,7 +7,8 @@
 ## General Rules
 
 - Node 파일·경로 작업은 Node core `fs`, `fs/promises`, `path`, `node:*` 모듈을 먼저 쓴다.
-- repo package root와 `.granite` 작업 디렉터리는 `@granite-js/utils`의 `getPackageRoot()`, `prepareLocalDirectory()`, `getLocalTempDirectoryPath()`를 우선 쓴다.
+- repo package root, package resolution, Hermes binary resolution, `.granite` 작업 디렉터리는 `@granite-js/utils`를 우선 쓴다.
+- 여러 Node-side package가 같은 방식으로 공유하는 작고 안정적인 파일·경로 helper는 `@granite-js/utils`에 둔다.
 - JS/TS subprocess 실행은 plugin package를 제외하고 `zx`의 `$`를 쓴다.
 - plugin, RN runtime, native package, docs/service는 서로 다른 실행 경계다. 한 경계의 도구를 다른 경계에 무리하게 옮기지 않는다.
 - `packages/mpack/src/vendors/**`, `dist`, `.granite`, `.swc`, `.vitest`, `coverage`, generated `router.gen.ts`, native typegen 출력은 기준에서 제외한다.
@@ -28,7 +29,7 @@
 | workspace list | `yarn workspaces list --json` 출력 파싱 |
 | template workspace lookup | `workspace-tools#getYarnWorkspaces()`, `findWorkspacePath()` |
 | file traversal | Node `fs`; watcher는 `chokidar`; vendored dts copy는 `fast-glob` |
-| package/module resolution | `require.resolve(request, { paths })`; ESM 경계는 `createRequire()` |
+| package/module resolution | `@granite-js/utils#resolvePackageRoot`; 특수 request는 `createRequire()` |
 | case conversion | `es-toolkit`의 `kebabCase`, `pascalCase` |
 | simple package merge | `es-toolkit#merge` |
 | plugin config merge | 도메인별 직접 merge 함수 |
@@ -51,7 +52,7 @@
 - `packages/plugin-router` uses `chokidar` for file watch and `@swc/core#parseFileSync()` for route export inspection.
 - `packages/mpack` uses Node FS/path/resolve APIs, `enhanced-resolve`, and `es-toolkit`; test and fixture subprocesses use `zx`.
 - `packages/react-native` should avoid Node FS/process tooling in runtime code; route files come from `require.context()`.
-- `packages/utils` provides shared filesystem helpers and zip reading helpers.
+- `packages/utils` provides shared filesystem, package resolution, Hermes binary resolution, local directory, template, safety invoke, and zip reading helpers.
 - RN native packages generally rely on package build tools, Codegen, Brick, Podspec, and platform JSON APIs rather than repo-level Node tooling.
 - `infra/*` uses AWS SDK/Pulumi libraries for cloud boundaries and `valibot` for deployment input/state validation.
 - `docs` and `services` should mostly delegate behavior to package scripts, VitePress, Granite, Vitest/Jest, TypeScript, and Biome.
@@ -71,7 +72,6 @@ These are current-state mismatches. Report them before changing behavior and ask
 
 ### Package-Specific
 
-- `packages/plugin-hermes` and `packages/cli` both compile Hermes bytecode but use different resolver assumptions.
 - `packages/plugin-micro-frontend` uses filesystem paths in generated import strings; check Windows behavior before copying that pattern.
 - `packages/plugin-router` and `packages/create-granite-app` both do template replacement.
 - `packages/native` `sync-packages` export-map validation does not match the current subpath export structure.
