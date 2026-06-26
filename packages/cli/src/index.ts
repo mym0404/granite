@@ -1,17 +1,12 @@
-import { Builtins, Cli } from 'clipanion';
-import { BuildCommand, HermesCommand, DevCommand } from './commands';
-
-const cli = new Cli({
-  binaryLabel: 'granite',
-  binaryName: 'granite',
-  enableCapture: true,
-});
+import { Command } from '@commander-js/extra-typings';
+import { buildCommand, hermesCommand, devCommand } from './commands';
 
 export async function initialize() {
-  cli.register(BuildCommand);
-  cli.register(HermesCommand);
-  cli.register(DevCommand);
-  cli.register(Builtins.HelpCommand);
+  const program = new Command('granite');
 
-  cli.runExit(process.argv.slice(2));
+  program.addCommand(buildCommand());
+  program.addCommand(hermesCommand());
+  program.addCommand(devCommand());
+
+  await program.parseAsync(process.argv);
 }

@@ -66,7 +66,6 @@
     "tsx": "^4.19.3",
     "typescript": "catalog:tools",
     "typescript-eslint": "^8.31.0",
-    "yargs": "^17.7.2",
     "zx": "catalog:tools"
   }
 }

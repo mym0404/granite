@@ -53,13 +53,14 @@
     "vitest": "catalog:tools"
   },
   "dependencies": {
+    "@commander-js/extra-typings": "catalog:tools",
     "@granite-js/mpack": "workspace:*",
     "@granite-js/plugin-core": "workspace:*",
     "@granite-js/utils": "workspace:*",
     "@inquirer/prompts": "^7.2.3",
     "@shopify/semaphore": "^3.1.0",
     "chalk": "^4",
-    "clipanion": "^4.0.0-rc.4",
+    "commander": "catalog:tools",
     "connect": "^3.7.0",
     "debug": "^4.3.7",
     "enquirer": "^2.4.1",

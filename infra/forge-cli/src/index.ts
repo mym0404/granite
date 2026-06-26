@@ -7,4 +7,4 @@ const program = new Command('granite-forge');
 program.description('A CLI tool for managing Granite applications');
 program.addCommand(deploy());
 program.addCommand(deployList());
-program.parse();
+await program.parseAsync();
