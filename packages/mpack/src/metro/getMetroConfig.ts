@@ -1,10 +1,9 @@
 import path from 'path';
 import type { AdditionalMetroConfig } from '@granite-js/plugin-core';
-import { getPackageRoot } from '@granite-js/utils';
+import { getPackageRoot, resolveReactNativePackageRoot } from '@granite-js/utils';
 import { createResolver } from './enhancedResolver';
 import { getMonorepoRoot } from './getMonorepoRoot';
 import { DEV_SERVER_DEFAULT_PORT, RESOLVER_MAIN_FIELDS, SOURCE_EXTENSIONS } from '../constants';
-import { getDefaultReactNativePath } from '../utils/getDefaultReactNativePath';
 import { getDefaultValues } from '../vendors/metro-config/src/defaults';
 import exclusionList from '../vendors/metro-config/src/defaults/exclusionList';
 import { mergeConfig } from '../vendors/metro-config/src/loadConfig';
@@ -35,7 +34,7 @@ const INTERNAL_CALLSITES_REGEX = new RegExp(
 
 export async function getMetroConfig({ rootPath }: GetMetroConfig, additionalConfig?: AdditionalMetroConfig) {
   const defaultConfig = getDefaultValues(rootPath);
-  const reactNativePath = additionalConfig?.reactNativePath ?? getDefaultReactNativePath(rootPath);
+  const reactNativePath = additionalConfig?.reactNativePath ?? resolveReactNativePackageRoot({ rootDir: rootPath });
   const resolvedRootPath = await getMonorepoRoot(rootPath);
   const packageRootPath = await getPackageRoot();
 
