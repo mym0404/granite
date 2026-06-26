@@ -33,6 +33,8 @@ Root `package.json` `resolutions` are Yarn overrides, not normal dependency decl
 
 After changing `.yarnrc.yml` catalogs or any catalog-consuming `package.json`, run `yarn install` and keep the generated `yarn.lock` changes.
 
+After changing package manifests, dependency catalogs, or `yarn.lock`, run `yarn generate-licenses` and keep generated package `NOTICE` changes for affected workspaces.
+
 ## No-Catalog Areas
 
 `packages/create-granite-app/templates/**/package.json` files must not use `catalog:` versions. These templates are copied into generated apps that are expected to work outside the Granite monorepo catalog setup.
@@ -48,6 +50,7 @@ When a no-catalog area needs the same version as a catalog-managed dependency, c
 Use these checks after dependency version changes:
 
 - `yarn install` verifies Yarn can resolve catalogs and regenerates `yarn.lock`.
+- `yarn generate-licenses` regenerates package `NOTICE` files after dependency metadata changes.
 - `yarn check-app-catalogs` verifies `packages/create-granite-app/templates/**/package.json` and `services/**/package.json` do not contain `catalog:` values; it does not currently scan package-local `example/` manifests.
 - Manually scan touched package-local `example/` manifests when they are part of a dependency version change.
 - Manually verify every `catalog:<group>` package name exists in the matching `.yarnrc.yml` catalog.

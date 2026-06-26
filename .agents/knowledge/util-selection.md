@@ -16,9 +16,7 @@
 
 | 역할 | 우선 선택 |
 | --- | --- |
-| `@granite-js/cli` command | `clipanion.Cli`, `Command`, `Option` |
-| app scaffolding CLI | `yargs(hideBin(process.argv))` |
-| deployment CLI | `@commander-js/extra-typings` |
+| Granite-owned public CLI | Commander |
 | interactive prompt | `@clack/prompts` |
 | root internal CLI | 수동 `process.argv` parser 또는 shell `$1` |
 | config loading | `packages/plugin-core`의 `loadConfig()`와 `c12` |
@@ -45,8 +43,9 @@
 ## Area Notes
 
 - Root JS/TS scripts run Yarn, Nx, `tsx`, `node`, `rimraf`, and package-local tools through repo scripts; subprocesses use `zx`.
+- Owned public CLI packages use Commander for argument and command parsing.
 - `packages/cli` owns public Granite commands and should not reimplement config loading outside `@granite-js/plugin-core/loadConfig`.
-- `packages/create-granite-app` uses `yargs` for arguments, `@clack/prompts` for missing values, Node FS for template copy, and `es-toolkit#merge` for package JSON merge.
+- `packages/create-granite-app` uses Commander for arguments, `@clack/prompts` for missing values, Node FS for template copy, and `es-toolkit#merge` for package JSON merge.
 - Plugin packages keep their local execution patterns unless the task explicitly includes plugin migration.
 - `packages/plugin-core` is the config loading, validation, and merge source of truth.
 - `packages/plugin-router` uses `chokidar` for file watch and `@swc/core#parseFileSync()` for route export inspection.
@@ -63,7 +62,6 @@ These are current-state mismatches. Report them before changing behavior and ask
 
 ### Cross-Cutting
 
-- CLI declaration is split across `clipanion`, `yargs`, `@commander-js/extra-typings`, and manual `process.argv`.
 - Process execution is intentionally split by boundary: JS/TS uses `zx`, and shell scripts use shell.
 - Workspace discovery is split across `@granite-js/utils`, `workspace-tools`, `@nx/devkit`, `yarn workspaces list --json`, and mpack custom detection.
 - File traversal is split across Node FS, `chokidar`, and `fast-glob`; do not consolidate without checking runtime and watcher needs.

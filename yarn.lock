@@ -3793,7 +3793,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commander-js/extra-typings@npm:^14.0.0":
+"@commander-js/extra-typings@npm:14.0.0, @commander-js/extra-typings@npm:^14.0.0":
   version: 14.0.0
   resolution: "@commander-js/extra-typings@npm:14.0.0"
   peerDependencies:
@@ -4817,6 +4817,7 @@ __metadata:
     "@babel/core": "catalog:babel"
     "@babel/preset-env": "catalog:babel"
     "@babel/preset-typescript": "catalog:babel"
+    "@commander-js/extra-typings": "catalog:tools"
     "@granite-js/mpack": "workspace:*"
     "@granite-js/plugin-core": "workspace:*"
     "@granite-js/utils": "workspace:*"
@@ -4830,7 +4831,7 @@ __metadata:
     "@types/serve-static": "npm:^1"
     "@vitest/coverage-v8": "catalog:tools"
     chalk: "npm:^4"
-    clipanion: "npm:^4.0.0-rc.4"
+    commander: "catalog:tools"
     connect: "npm:^3.7.0"
     debug: "npm:^4.3.7"
     enquirer: "npm:^2.4.1"
@@ -4888,12 +4889,12 @@ __metadata:
     "@aws-sdk/credential-providers": "npm:^3.817.0"
     "@aws-sdk/shared-ini-file-loader": "npm:^3.374.0"
     "@clack/prompts": "npm:^0.10.1"
-    "@commander-js/extra-typings": "npm:^14.0.0"
+    "@commander-js/extra-typings": "catalog:tools"
     "@granite-js/deployment-manager": "workspace:*"
     "@granite-js/plugin-core": "workspace:*"
     "@types/node": "catalog:tools"
     "@vitest/coverage-v8": "catalog:tools"
-    commander: "npm:^14.0.0"
+    commander: "catalog:tools"
     tsdown: "catalog:tools"
     typescript: "catalog:tools"
     uuid: "npm:^11.1.0"
@@ -12595,7 +12596,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clipanion@npm:^4.0.0-rc.2, clipanion@npm:^4.0.0-rc.4":
+"clipanion@npm:^4.0.0-rc.2":
   version: 4.0.0-rc.4
   resolution: "clipanion@npm:4.0.0-rc.4"
   dependencies:
@@ -12731,6 +12732,13 @@ __metadata:
   version: 2.0.3
   resolution: "comma-separated-tokens@npm:2.0.3"
   checksum: 10c0/91f90f1aae320f1755d6957ef0b864fe4f54737f3313bd95e0802686ee2ca38bff1dd381964d00ae5db42912dd1f4ae5c2709644e82706ffc6f6842a813cdd67
+  languageName: node
+  linkType: hard
+
+"commander@npm:14.0.0":
+  version: 14.0.0
+  resolution: "commander@npm:14.0.0"
+  checksum: 10c0/73c4babfa558077868d84522b11ef56834165d472b9e86a634cd4c3ae7fc72d59af6377d8878e06bd570fe8f3161eced3cbe383c38f7093272bb65bd242b595b
   languageName: node
   linkType: hard
 
@@ -12949,11 +12957,12 @@ __metadata:
   resolution: "create-granite-app@workspace:packages/create-granite-app"
   dependencies:
     "@clack/prompts": "npm:^0.8.2"
+    "@commander-js/extra-typings": "catalog:tools"
     "@granite-js/utils": "workspace:*"
     "@types/kill-port": "npm:2.0.1"
     "@types/node": "catalog:tools"
-    "@types/yargs": "npm:^17.0.33"
     "@vitest/coverage-v8": "catalog:tools"
+    commander: "catalog:tools"
     es-toolkit: "npm:^1.39.8"
     kill-port: "npm:2.0.1"
     tsdown: "catalog:tools"
@@ -12962,7 +12971,6 @@ __metadata:
     vitest: "catalog:tools"
     wait-port: "npm:^1.1.0"
     workspace-tools: "npm:^0.38.1"
-    yargs: "npm:^17.7.2"
     zx: "catalog:tools"
   bin:
     cba: ./bin.js
@@ -15761,7 +15769,6 @@ __metadata:
     tsx: "npm:^4.19.3"
     typescript: "catalog:tools"
     typescript-eslint: "npm:^8.31.0"
-    yargs: "npm:^17.7.2"
     zx: "catalog:tools"
   dependenciesMeta:
     hermes-compiler:

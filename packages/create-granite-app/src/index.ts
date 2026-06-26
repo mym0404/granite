@@ -1,7 +1,6 @@
 import { isCancel, intro, text, tasks, cancel, note, outro, select } from '@clack/prompts';
+import { Command, Option } from '@commander-js/extra-typings';
 import { kebabCase } from 'es-toolkit/string';
-import yargs from 'yargs';
-import { hideBin } from 'yargs/helpers';
 import { APP_TYPE_LIST, type AppType } from './appTypes';
 import { applyTemplateModule, copyTemplate } from './copyTemplate';
 import { getPackageManager } from './getPackageManager';
@@ -33,24 +32,17 @@ function assertValidAppName(input: string) {
 async function run() {
   const pkgInfo = getPackageManager();
 
-  const cli = await yargs(hideBin(process.argv))
-    .options({
-      tools: {
-        type: 'string',
-        description: 'Select a development tool to include in the project',
-        choices: TOOL_TYPE_LIST,
-      },
-      type: {
-        type: 'string',
-        description: 'Select Granite app type',
-        choices: APP_TYPE_LIST,
-      },
-    })
-    .help().argv;
+  const cli = new Command('create-granite-app')
+    .argument('[appPath]', 'Project name or path')
+    .addOption(new Option('--tools <tool>', 'Select a development tool to include in the project').choices(TOOL_TYPE_LIST))
+    .addOption(new Option('--type <type>', 'Select Granite app type').choices(APP_TYPE_LIST));
+
+  cli.parse(process.argv);
+  const options = cli.opts();
 
   intro('Create Granite App Project');
 
-  const appPathFromArg = typeof cli._[0] === 'string' ? cli._[0] : null;
+  const appPathFromArg = typeof cli.args[0] === 'string' ? cli.args[0] : null;
 
   const appPath = await resolveFallback(appPathFromArg, () =>
     text({
@@ -78,7 +70,7 @@ async function run() {
 
   assertValidAppName(appPath);
 
-  const appType = await resolveFallback((cli.type as AppType | undefined) ?? null, async () =>
+  const appType = await resolveFallback((options.type as AppType | undefined) ?? null, async () =>
     select<AppType>({
       message: 'Select app type',
       initialValue: 'remote',
@@ -94,7 +86,7 @@ async function run() {
     process.exit(0);
   }
 
-  const toolType = await resolveFallback((cli.tools as ToolType | undefined) ?? null, async () =>
+  const toolType = await resolveFallback((options.tools as ToolType | undefined) ?? null, async () =>
     select<ToolType>({
       message: 'Select tool',
       options: [

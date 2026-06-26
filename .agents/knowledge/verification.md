@@ -18,6 +18,7 @@ Because Yarn Plug'n'Play is enabled, run commands through `yarn` from the releva
 - `yarn test:no-parallel` runs `nx run-many -t test:no-parallel --parallel=false --nxBail`.
 - `yarn check-exports` runs `.scripts/check-exports.mts`; it exits early when `git diff origin/main --name-only` has no `package.json` change, otherwise it builds export-bearing workspaces and verifies package `main`, `module`, `bin`, `types`, and `exports` targets are included in `yarn pack --dry-run`.
 - `yarn check-app-catalogs` runs `.scripts/check-no-app-catalog.ts`.
+- `yarn generate-licenses` regenerates package `NOTICE` files from current workspace dependency metadata.
 - `yarn check-licenses` checks generated license output.
 - `yarn consistency-check-licenses` checks license consistency.
 
