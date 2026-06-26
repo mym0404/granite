@@ -59,7 +59,7 @@
     "hygen": "6.2.11",
     "nx": "^21.0.3",
     "picocolors": "^1.1.1",
-    "prettier": "^3.3.3",
+    "prettier": "catalog:tools",
     "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "tsdown": "catalog:tools",
