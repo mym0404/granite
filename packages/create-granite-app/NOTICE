@@ -27,19 +27,19 @@ Third-Party Libraries:
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/natemoo-re/clack
 	
-2. **@types/kill-port**
+2. **@commander-js/extra-typings**
+	
+   - License: MIT
+   - License Text: https://opensource.org/licenses/MIT
+   - Repository: git+https://github.com/commander-js/extra-typings.git
+	
+3. **@types/kill-port**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/DefinitelyTyped/DefinitelyTyped.git
 	
-3. **@types/node**
-	
-   - License: MIT
-   - License Text: https://opensource.org/licenses/MIT
-   - Repository: https://github.com/DefinitelyTyped/DefinitelyTyped.git
-	
-4. **@types/yargs**
+4. **@types/node**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
@@ -51,53 +51,53 @@ Third-Party Libraries:
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/vitest-dev/vitest.git
 	
-6. **es-toolkit**
+6. **commander**
+	
+   - License: MIT
+   - License Text: https://opensource.org/licenses/MIT
+   - Repository: git+https://github.com/tj/commander.js.git
+	
+7. **es-toolkit**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/toss/es-toolkit.git
 	
-7. **kill-port**
+8. **kill-port**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/tiaanduplessis/kill-port.git
 	
-8. **tsdown**
+9. **tsdown**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/rolldown/tsdown.git
 	
-9. **tsx**
+10. **tsx**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/privatenumber/tsx.git
 	
-10. **vitest**
+11. **vitest**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/vitest-dev/vitest.git
 	
-11. **wait-port**
+12. **wait-port**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/dwmkerr/wait-port.git
 	
-12. **workspace-tools**
+13. **workspace-tools**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/microsoft/workspace-tools
-	
-13. **yargs**
-	
-   - License: MIT
-   - License Text: https://opensource.org/licenses/MIT
-   - Repository: https://github.com/yargs/yargs.git
 	
 14. **create-granite-app**
 	

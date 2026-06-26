@@ -39,145 +39,151 @@ Third-Party Libraries:
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/babel/babel.git
 	
-4. **@inquirer/prompts**
+4. **@commander-js/extra-typings**
+	
+   - License: MIT
+   - License Text: https://opensource.org/licenses/MIT
+   - Repository: git+https://github.com/commander-js/extra-typings.git
+	
+5. **@inquirer/prompts**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/SBoudrias/Inquirer.js.git
 	
-5. **@shopify/semaphore**
+6. **@shopify/semaphore**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/Shopify/quilt.git
 	
-6. **@types/babel__core**
+7. **@types/babel__core**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/DefinitelyTyped/DefinitelyTyped.git
 	
-7. **@types/babel__preset-env**
+8. **@types/babel__preset-env**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/DefinitelyTyped/DefinitelyTyped.git
 	
-8. **@types/connect**
+9. **@types/connect**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/DefinitelyTyped/DefinitelyTyped.git
 	
-9. **@types/debug**
+10. **@types/debug**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/DefinitelyTyped/DefinitelyTyped.git
 	
-10. **@types/node**
+11. **@types/node**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/DefinitelyTyped/DefinitelyTyped.git
 	
-11. **@types/serve-static**
+12. **@types/serve-static**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/DefinitelyTyped/DefinitelyTyped.git
 	
-12. **@vitest/coverage-v8**
+13. **@vitest/coverage-v8**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/vitest-dev/vitest.git
 	
-13. **chalk**
+14. **chalk**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/chalk/chalk.git
 	
-14. **clipanion**
+15. **commander**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
-   - Repository: https://github.com/arcanis/clipanion
+   - Repository: git+https://github.com/tj/commander.js.git
 	
-15. **connect**
+16. **connect**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/senchalabs/connect.git
 	
-16. **debug**
+17. **debug**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git://github.com/debug-js/debug.git
 	
-17. **enquirer**
+18. **enquirer**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/enquirer/enquirer.git
 	
-18. **es-toolkit**
+19. **es-toolkit**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/toss/es-toolkit.git
 	
-19. **esbuild**
+20. **esbuild**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/evanw/esbuild.git
 	
-20. **eslint**
+21. **eslint**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/eslint/eslint.git
 	
-21. **ora**
+22. **ora**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/sindresorhus/ora.git
 	
-22. **tsdown**
+23. **tsdown**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/rolldown/tsdown.git
 	
-23. **typanion**
+24. **typanion**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: https://github.com/arcanis/typanion
 	
-24. **vitest**
+25. **vitest**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/vitest-dev/vitest.git
 	
-25. **zod**
+26. **zod**
 	
    - License: MIT
    - License Text: https://opensource.org/licenses/MIT
    - Repository: git+https://github.com/colinhacks/zod.git
 	
-26. **typescript**
+27. **typescript**
 	
    - License: Apache-2.0
    - License Text: https://www.apache.org/licenses/LICENSE-2.0
    - Repository: https://github.com/microsoft/TypeScript.git
 	
-27. **zx**
+28. **zx**
 	
    - License: Apache-2.0
    - License Text: https://www.apache.org/licenses/LICENSE-2.0
