@@ -1,0 +1,38 @@
+{
+  "name": "granite-manager",
+  "version": "1.0.32",
+  "type": "module",
+  "description": "TUI manager for Granite applications",
+  "bin": "./bin/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toss/granite.git",
+    "directory": "packages/granite-manager"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "package.json"
+  ],
+  "license": "Apache-2.0",
+  "scripts": {
+    "prepack": "yarn build",
+    "build": "tsdown",
+    "dev": "tsx src/index.tsx",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --check ."
+  },
+  "dependencies": {
+    "ink": "^7.1.0",
+    "react": "catalog:rn84"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:rn84",
+    "eslint": "catalog:tools",
+    "prettier": "catalog:tools",
+    "tsdown": "catalog:tools",
+    "tsx": "catalog:tools",
+    "typescript": "catalog:tools"
+  }
+}
