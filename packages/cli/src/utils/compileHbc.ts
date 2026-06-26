@@ -1,5 +1,4 @@
 import assert from 'assert';
-import fs from 'fs';
 import os from 'os';
 import path from 'path';
 import { isNotNil } from 'es-toolkit';
@@ -12,9 +11,9 @@ interface CompileHbcOptions {
 }
 
 const binary = {
-  Darwin: ['hermesc', 'osx-bin', 'hermesc'],
-  Linux: ['hermesc', 'linux64-bin', 'hermesc'],
-  Windows_NT: ['hermesc', 'win64-bin', 'hermesc.exe'],
+  Darwin: 'react-native/sdks/hermesc/osx-bin/hermesc',
+  Linux: 'react-native/sdks/hermesc/linux64-bin/hermesc',
+  Windows_NT: 'react-native/sdks/hermesc/win64-bin/hermesc.exe',
 } as const;
 
 export async function compileHbc({ rootDir, filePath, sourcemap }: CompileHbcOptions) {
@@ -43,26 +42,17 @@ export async function compileHbc({ rootDir, filePath, sourcemap }: CompileHbcOpt
 
 function getHermesc(rootDir: string) {
   const os = getOs();
-  const binaryParts = binary[os];
+  const binarySource = binary[os];
 
-  assert(binaryParts, `지원하지 않는 OS 입니다: ${os}`);
+  assert(binarySource, `지원하지 않는 OS 입니다: ${os}`);
 
-  const reactNativePath = path.dirname(require.resolve('react-native/package.json', { paths: [rootDir] }));
-
-  try {
-    const hermesCompilerPath = path.dirname(require.resolve('hermes-compiler/package.json', { paths: [reactNativePath] }));
-    const hermesCompilerBinary = path.join(hermesCompilerPath, ...binaryParts);
-
-    if (fs.existsSync(hermesCompilerBinary)) {
-      return hermesCompilerBinary;
-    }
-  } catch {
-    // Use React Native bundled hermesc below.
-  }
-
-  return path.join(reactNativePath, 'sdks', ...binaryParts);
+  return resolveFromRoot(rootDir, binarySource);
 }
 
 function getOs() {
   return os.type() as 'Darwin' | 'Linux' | 'Windows_NT';
+}
+
+function resolveFromRoot(rootDir: string, request: string) {
+  return require.resolve(request, { paths: [rootDir] });
 }
